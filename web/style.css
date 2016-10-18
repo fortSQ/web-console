@@ -1,0 +1,86 @@
+/** sassmeister.com */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    outline: 0;
+}
+
+.application {
+    display: flex;
+}
+
+.console {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.settings {
+    flex: 1;
+}
+
+.output {
+    display: flex;
+    flex: 1;
+}
+
+#out {
+    flex: 1;
+    background-color: black;
+    color: green;
+    font-size: 1.4rem;
+    padding: .5rem .2rem;
+    border: 0;
+}
+
+#out::selection {
+    background-color: white;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+}
+.settings .enabled, .settings .disabled {
+    flex: 1;
+    display: flex;
+}
+.settings .enabled select, .settings .disabled select {
+    flex: 1;
+}
+.settings .actions {
+    display: flex;
+    justify-content: center;
+}
+.settings .actions button {
+    margin: .25rem;
+}
+
+.input {
+    display: flex;
+    background-color: #333;
+    color: cyan;
+    font-family: monospace;
+}
+.input .arrow {
+    margin-right: .25rem;
+}
+.input input {
+    flex: 1;
+    border: 0;
+    background-color: inherit;
+    color: white;
+}

@@ -1,2 +1,1 @@
-# web-console
-Magistracy app
+* [React](//web-console.romanov-vrn.ru/react.html)
