@@ -1,10 +1,28 @@
+/// <reference path="./jquery" />
+
 const EOL = '\r\n'
 
-/**
- * Команды
- */
-class Command {
-    constructor(inputLine, cityList) {
+interface ICommand {
+    run(): Promise<string>
+}
+
+class Command implements ICommand {
+    private command: string
+    private argumentList: any[]
+
+    private cityList: CityList
+
+    private commandList = {
+        '?': this.helpCommand,
+        'help': this.helpCommand,
+        'date': this.dateCommand,
+        'time': this.timeCommand,
+        'ping': this.pingCommand,
+        'weather': this.weatherCommand,
+        'traffic': this.trafficCommand,
+    }
+
+    public constructor(inputLine: string, cityList: CityList) {
         let inputLineAsArray = inputLine.split(' ').map(item => item.trim())
         this.command = inputLineAsArray.shift()
         this.argumentList = inputLineAsArray
@@ -12,25 +30,13 @@ class Command {
         this.cityList = cityList
     }
 
-    get commandList() {
-        return {
-            '?': this.helpCommand,
-            'help': this.helpCommand,
-            'date': this.dateCommand,
-            'time': this.timeCommand,
-            'ping': this.pingCommand,
-            'weather': this.weatherCommand,
-            'traffic': this.trafficCommand,
-        }
-    }
-
-    run() {
+    public run(): Promise<string> {
         return Promise.resolve(this.command)
             .then(this.prepare.bind(this))
             .then(this.execute.bind(this))
     }
 
-    prepare() {
+    private prepare(): Promise<string> {
         return new Promise((resolve, reject) => {
             if (this.command in this.commandList) {
                 resolve(this.command)
@@ -40,15 +46,15 @@ class Command {
         })
     }
 
-    execute() {
+    private execute(): Promise<string> {
         return new Promise(this.commandList[this.command].bind(this))
     }
 
-    pingCommand(resolve) {
+    private pingCommand(resolve) {
         resolve('pong')
     }
 
-    helpCommand(resolve) {
+    private helpCommand(resolve) {
         resolve(
             `Доступные команды:
 ping\t\t- проверка работоспособности консоли
@@ -59,20 +65,20 @@ traffic\t\t- пробки для активных городов`
         )
     }
 
-    dateCommand(resolve) {
+    private dateCommand(resolve) {
         resolve(
             (new Intl.DateTimeFormat('ru', {day: 'numeric', month: 'long', year: 'numeric'}))
                 .format(new Date)
         )
     }
 
-    timeCommand(resolve) {
+    private timeCommand(resolve) {
         resolve(
             (new Date).toLocaleString('ru', {hour: 'numeric', minute: 'numeric', second: 'numeric'})
         )
     }
 
-    weatherCommand(resolve, reject) {
+    private weatherCommand(resolve, reject) {
         const openweathermapApiKey = '80492ef90c36a190f2a306ffa515df5a'
         const openweathermapUnits = 'metric'
         const mappingIdList = {
@@ -107,7 +113,7 @@ traffic\t\t- пробки для активных городов`
             .fail(() => reject('Error connecting with openweathermap.org :('))
     }
 
-    trafficCommand(resolve, reject) {
+    private trafficCommand(resolve, reject) {
         const url = 'http://jgo.maps.yandex.net/trf/stat.js'
         const mappingIdList = {
             [CityList.VORONEZH]: 193,

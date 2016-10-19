@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "removeComments": true
+  },
+  "include": ["./src/TypeScript/**/*.ts"]
+}

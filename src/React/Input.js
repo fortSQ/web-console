@@ -17,7 +17,7 @@ class Input extends React.Component {
         let valueLink = {
             value: this.state.value,
             requestChange: this.handleChange
-        }; // обработка ввода
+        } // обработка ввода
         return (
             <input
                 ref={(ref) => this._input = ref}

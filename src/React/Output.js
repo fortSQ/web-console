@@ -17,6 +17,6 @@ class Output extends React.Component {
     }
 
     componentDidUpdate() {
-        $(this._textarea).scrollTop($(this._textarea)[0].scrollHeight); // крутим мопэд вниз
+        $(this._textarea).scrollTop($(this._textarea)[0].scrollHeight) // крутим мопэд вниз
     }
 }

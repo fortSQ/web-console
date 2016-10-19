@@ -9,7 +9,7 @@ class Application extends React.Component {
 
     handle(e) {
         let event = new EventDecorator(e)
-        let inputLine = this._console._input.state.value;
+        let inputLine = this._console._input.state.value
 
         if (event.isEnter()) {
             let outputToScreen = (text, isNewLine) => this._console._output.append(EOL +  (isNewLine ? '> ' : '') + text)

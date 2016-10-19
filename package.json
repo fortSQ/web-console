@@ -1,0 +1,14 @@
+{
+  "name": "web-console",
+  "version": "0.0.1",
+  "description": "Magistracy app",
+  "scripts": {
+    "ts": "node node_modules/typescript/lib/tsc.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dmitry V. Romanov <fortsq@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "latest"
+  }
+}
